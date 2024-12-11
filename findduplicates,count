@@ -1,22 +1,33 @@
 //leetcode:442. Find All Duplicates in an Array
-import java.util.HashSet;
+import java.util.HashSet; 
 public class Main {
-    public void findDuplicates(int[] arr) {
+    public void removeDuplicates(int[] arr) {
         HashSet<Integer> set = new HashSet<>();
         int count = 0;
         for (int num : arr) { 
             if (set.contains(num)) {
                 count = count + 1;
-                System.out.println("Duplicate found: " + num);
+                System.out.println("Duplicate found: " + num); 
             } else {
                 set.add(num);
             }
         }
+        System.out.print("Array without duplicates: ");
+        for (int num : set) {
+            System.out.print(num + " ");
+        }       
+        System.out.println(); 
         System.out.println("Total duplicate count: " + count); 
     }
     public static void main(String[] args) {
         Main obj = new Main();
         int[] arr = {1, 2, 3, 2, 4, 5, 3}; 
-        obj.findDuplicates(arr);
+        obj.removeDuplicates(arr); 
     }
 }
+/*
+Duplicate found: 2
+Duplicate found: 3
+Array without duplicates: 1 2 3 4 5 
+Total duplicate count: 2
+*/
