@@ -5,7 +5,7 @@ public class Main {
         HashSet<Integer> set = new HashSet<>();
         int count = 0;
         for (int num : arr) { 
-            if (set.contains(num)) {
+            if (set.contains(num)) {    {  }, {1, 2, 3, 2, 4, 5, 3}; 
                 count = count + 1;
                 System.out.println("Duplicate found: " + num); 
             } else {
