@@ -1,0 +1,47 @@
+public class Main {
+	public static int fib(int x){
+	    if(x==1 || x==0){
+	        return 0;
+	    }
+	    int ra1=fib(x-1);
+	    int ra2=fib(x-2);
+	    return ra1+ra2;
+	}
+   public static int num(int num){
+		if(num==1) {
+			return 1;
+		}
+		int ra=num(num-1);
+		return ra*num;
+		
+   }
+   public static int pow(int a,int b){
+	   if(b==1) {
+		   return a;
+	   }
+	   int r=pow(a,b-1);
+	   return r*a;
+	   
+   }
+   public static int sum(int si,int ei,rr){
+       if(si==ei){
+           return arr[si];
+       }
+       int ra=sum(si+1,ei,arr);
+       return ra+arr[si];
+   }
+   
+public static void main(String args[]){
+	   int a=fib(5);
+	   System.out.println(+a);
+	   int b=num(5);
+	   System.out.println(+b);  
+	   int c=pow(2,3);
+	   System.out.println(+c); 
+	   
+	}
+}
+
+
+
+
