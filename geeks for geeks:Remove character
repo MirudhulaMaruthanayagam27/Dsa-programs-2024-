@@ -1,0 +1,20 @@
+geeks for geeks:Remove character
+class Solution {
+    static String removeChars(String string1, String string2) {
+        StringBuilder result = new StringBuilder();
+        for (char ch : string1.toCharArray()) {
+            if (!string2.contains(String.valueOf(ch))) {
+                result.append(ch);
+            }
+        }
+        return result.toString();
+    }
+    public static void main(String[] args) {
+        String string1 = "computer";
+        String string2 = "cat";
+        System.out.println("Output: " + removeChars(string1, string2)); // Output: "ompuer"
+        String string1_2 = "occurrence";
+        String string2_2 = "car";
+        System.out.println("Output: " + removeChars(string1_2, string2_2)); // Output: "ouene"
+    }
+}
