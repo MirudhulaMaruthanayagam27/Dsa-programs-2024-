@@ -1,0 +1,21 @@
+public class ReverseWords {
+    public static String reverseWords(String s) {
+        String[] words = s.trim().split(" "); 
+        String r = "";
+        for (String word : words) {
+            String reversedWord = new StringBuilder(word).reverse().toString();
+            r += reversedWord + " ";
+        }
+        return r.trim(); 
+    }
+
+    public static void main(String[] args) {
+        String s1 = " i like this program very much ";
+        String s2 = " pqr mno ";
+        String s3 = "pqr";
+
+        System.out.println(reverseWords(s1)); // "i ekil siht margorp yrev hcum"
+        System.out.println(reverseWords(s2)); // "rqp onm"
+        System.out.println(reverseWords(s3)); // "rqp"
+    }
+}
