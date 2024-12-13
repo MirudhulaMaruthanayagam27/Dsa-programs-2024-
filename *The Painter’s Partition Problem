@@ -1,0 +1,140 @@
+public class Main {
+    // Main function to find the minimum time
+    public static int findMinTime(int[] arr, int k) {
+        int low = 0;
+        int high = 75;
+        for (int i = 0; i < arr.length; i++) {
+            high += arr[i];
+            low = Math.max(low, arr[i]);
+        }
+        int ans = high;
+         // Binary search to find the minimum time
+        while (low <= high) {
+            int mid = low + (high - low) / 2; 
+            if (check(mid, arr, k)) {
+                ans = mid;
+                high = mid - 1;  
+            } else {
+                low = mid + 1;  
+            }
+        }
+        
+        return ans;  
+    }
+    public static boolean check(int mid, int[] arr, int k) {
+        int count = 1; 
+        int ct = 0;     
+        for (int i = 0; i < arr.length; i++) {
+            if (ct + arr[i] > mid) {
+                count++;                
+                ct = arr[i];    
+                if (count > k) {        
+                    return false;
+                }
+            } else {
+                ct += arr[i]; 
+            }
+        }
+        
+        return true;  
+    }
+    public static void main(String[] args) {
+        int[] arr = {3, 5, 1, 7, 8, 2, 5, 3, 10, 1, 4, 7, 5, 4, 6}; 
+        int k = 4;  
+        System.out.println("Minimum time to paint all boards: " + findMinTime(arr, k));
+    }
+}
+
+
+
+//dry run for this code:
+Let's break down the process and explain how the binary search works in each iteration of the code, as well as how the check function works.
+
+Binary Search Process:
+We are using binary search to find the minimum time required to paint all the boards, with k painters. We keep narrowing down the time range (low to high) to find the smallest time in which all boards can be painted.
+
+Key Variables:
+low: This is the minimum possible time (the time needed to paint the largest board, because no painter can paint faster than the size of the board).
+high: This is the maximum possible time (the total sum of all board lengths, i.e., the time if one painter paints all the boards).
+mid: This is the middle value between low and high, representing the current time we are checking to see if it's possible to paint all boards within that time using k painters.
+Iteration 1:
+Initial Values:
+low = 10 (the largest board in the array).
+high = 71 (the total sum of all the board lengths).
+Mid Calculation:
+mid = low + (high - low) / 2 = 10 + (71 - 10) / 2 = 40.
+Check Function Call:
+We check if it is possible to paint all boards in 40 units of time using k = 4 painters by calling the check(40, arr, 4) function.
+
+
+Inside check(40, arr, 4):
+First Painter (count = 1, ct = 0):
+arr[0] = 3, ct = 0 + 3 = 3 (first board fits within 40).
+arr[1] = 5, ct = 3 + 5 = 8 (second board fits within 40).
+arr[2] = 1, ct = 8 + 1 = 9 (third board fits within 40).
+arr[3] = 7, ct = 9 + 7 = 16 (fourth board fits within 40).
+arr[4] = 8, ct = 16 + 8 = 24 (fifth board fits within 40).
+arr[5] = 2, ct = 24 + 2 = 26 (sixth board fits within 40).
+arr[6] = 5, ct = 26 + 5 = 31 (seventh board fits within 40).
+arr[7] = 3, ct = 31 + 3 = 34 (eighth board fits within 40).
+arr[8] = 10, ct = 34 + 10 = 44 (ninth board exceeds 40, so we need a new painter).
+
+Switch to Second Painter (count = 2, ct = 10).
+Second Painter (count = 2, ct = 10):
+arr[9] = 1, ct = 10 + 1 = 11 (tenth board fits within 40).
+arr[10] = 4, ct = 11 + 4 = 15 (eleventh board fits within 40).
+arr[11] = 7, ct = 15 + 7 = 22 (twelfth board fits within 40).
+arr[12] = 5, ct = 22 + 5 = 27 (thirteenth board fits within 40).
+arr[13] = 4, ct = 27 + 4 = 31 (fourteenth board fits within 40).
+arr[14] = 6, ct = 31 + 6 = 37 (fifteenth board fits within 40).
+Total number of painters used = 2 (which is ≤ 4, so it's possible).
+Conclusion of check(40):
+
+Since we were able to paint all boards with 2 painters within 40 units of time, check(40) returns true.
+Binary Search Adjustment:
+Since it's possible to complete the task in mid = 40 time, we update the result: ans = mid = 40.
+We then try to minimize the time further by adjusting high = mid - 1 = 39.
+
+
+Iteration 2:
+New Values:
+low = 10, high = 39.
+Mid Calculation:
+mid = 10 + (39 - 10) / 2 = 24.
+Check Function Call:
+
+We check if it's possible to paint all boards in 24 units of time using k = 4 painters by calling check(24, arr, 4).
+
+Inside check(24, arr, 4):
+First Painter (count = 1, ct = 0):
+arr[0] = 3, ct = 0 + 3 = 3.
+arr[1] = 5, ct = 3 + 5 = 8.
+arr[2] = 1, ct = 8 + 1 = 9.
+arr[3] = 7, ct = 9 + 7 = 16.
+arr[4] = 8, ct = 16 + 8 = 24.
+Switch to Second Painter (count = 2, ct = 8).
+
+Second Painter (count = 2, ct = 8):
+arr[5] = 2, ct = 8 + 2 = 10.
+arr[6] = 5, ct = 10 + 5 = 15.
+arr[7] = 3, ct = 15 + 3 = 18.
+arr[8] = 10, ct = 18 + 10 = 28 (exceeds 24, switch to third painter).
+Switch to Third Painter (count = 3, ct = 10).
+
+Third Painter (count = 3, ct = 10):
+arr[9] = 1, ct = 10 + 1 = 11.
+arr[10] = 4, ct = 11 + 4 = 15.
+arr[11] = 7, ct = 15 + 7 = 22.
+arr[12] = 5, ct = 22 + 5 = 27 (exceeds 24, switch to fourth painter).
+
+Switch to Fourth Painter (count = 4, ct = 5).
+Fourth Painter (count = 4, ct = 5):
+arr[13] = 4, ct = 5 + 4 = 9.
+arr[14] = 6, ct = 9 + 6 = 15.
+Total number of painters used = 4 (which is ≤ 4, so it's possible).
+
+Conclusion of check(24):
+We were able to paint all boards using 4 painters within 24 units of time, so check(24) returns true.
+Binary Search Adjustment:
+Since it's possible to complete the task in mid = 24 time, we update the result: ans = mid = 24.
+We then try to minimize the time further by adjusting high = mid - 1 = 23.
