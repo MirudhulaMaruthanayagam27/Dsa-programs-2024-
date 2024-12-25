@@ -1,0 +1,18 @@
+public class Main{
+    public static void main(String args[]){
+        int ans=mazepath(2,2);
+        System.out.println(+ans);
+    }
+    public static int mazepath(int r,int c){
+        if(r==1 && c==1){
+            return 1;
+        }
+        if(r<0 || c<0){
+            return 0; 
+        }
+        int f1=mazepath(r,c-1);
+        int f2=mazepath(r-1,c);
+        int ans=f1+f2;
+        return ans;
+    }
+}
