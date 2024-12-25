@@ -1,0 +1,30 @@
+public class Main{
+    public static void main(String args[]){
+        int ans=climbstairs(4," ");
+        System.out.println(+ans);
+    }
+    public static int climbstairs(int n,String path){
+        if(n==0){
+            System.out.println(path);
+            return 1;
+        }
+        if(n<0){
+            return 0;
+        }
+        int f1=climbstairs(n-1,path +"1");
+        int f2=climbstairs(n-2,path +"2");
+        int f3=climbstairs(n-3,path+"3");
+        int ans=f1+f2+f3;
+        return ans;
+    }
+}
+
+//output:
+ 1111
+ 112
+ 121
+ 13
+ 211
+ 22
+ 31
+7(number of paths count) 
